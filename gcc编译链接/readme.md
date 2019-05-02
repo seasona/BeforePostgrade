@@ -31,3 +31,19 @@ CFLAGS和LDFLAGS其实都只是自定义的变量，CFLAGS用于编译，LDFLAGS
 |-Ldir| 	用于把新目录添加到库搜索路径上，可以使用相对和绝对路径，“-L.”、“-L./include”、“-L/opt/include”|
 |-Wl,option |	把选项 option 传递给连接器，如果 option 中含有逗号,就在逗号处分割成多个选项|
 |-static| 	使用静态库链接生成目标文件，避免使用共享库，生成目标文件会比使用动态链接库大|
+
+##### -L, -l(小写L)，-I(大写i)的区别
+-I(大写i)是用于编译时，指向头文件所在的目录
+```c++
+//直接编译需要指定头文件目录
+#include "../sort/sort.h"
+//如果调用gcc -c max.c -I ../sort就不用在文件中指定头文件目录
+#include "sort.h"
+```
+-l(小写L)参数就是用来指定程序要链接的库，-l参数紧接着就是库名
+-L参数是用来指定程序要链接的库所在的目录
+
+##### LD_LIBRARY_PATH & LIBRARY_PATH
+也是自定义变量，可以用export到环境变量中
+LIBRARY_PATH是程序编译期间查找动态链接库时指定查找共享库的路径
+LD_LIBRARY_PATH是程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径
