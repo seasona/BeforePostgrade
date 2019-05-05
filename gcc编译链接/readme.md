@@ -41,7 +41,7 @@ CFLAGS和LDFLAGS其实都只是自定义的变量，CFLAGS用于编译，LDFLAGS
 #include "sort.h"
 ```
 -l(小写L)参数就是用来指定程序要链接的库，-l参数紧接着就是库名
--L参数是用来指定程序要链接的库所在的目录
+-L参数是用来指定程序要链接的共享库所在的目录
 
 #### LD_LIBRARY_PATH & LIBRARY_PATH
 也是自定义变量，可以用export到环境变量中
