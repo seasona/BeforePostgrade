@@ -1,5 +1,5 @@
 ### 学习pthread的编程
-- thread
+-  thread
 -  signal
 -  mutex
 -  cond
