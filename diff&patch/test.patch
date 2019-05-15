@@ -1,0 +1,5 @@
+4c4,5
+<     printf("This is test1.c\n");
+---
+>     printf("This is test2.c\n");
+>     printf("one more line\n");
