@@ -20,7 +20,7 @@ pthread_mutex_t lock=PTHREAD_MUTEX_INITIALIZER;
 void *consumer(void *p){
     while(1){
         pthread_mutex_lock(&lock);
-        if(head==NULL){
+        while(head==NULL){  //使用while而不使用if来避免spurious wakeup
             pthread_cond_wait(&has_product,&lock);
         }
         mp=head;
