@@ -56,7 +56,7 @@ int main()
                     flag = 1;
                     break;
                 }
-                printf("welcom to epoll's world!\n");
+                printf("welcome to epoll's world!\n");
             }
         }
     }
