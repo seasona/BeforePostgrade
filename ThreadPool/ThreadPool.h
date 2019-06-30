@@ -14,8 +14,7 @@ public:
     ~ThreadPool();
 
     template <typename F, typename... Args>
-    auto enqueue(F&& f, Args&&... args)
-        -> std::future<typename std::result_of<F(Args...)>::type>;
+    auto enqueue(F&& f, Args&&... args) -> std::future<decltype(f(args...))>;
 
 private:
     std::vector<std::thread> workers_;
@@ -53,12 +52,13 @@ inline ThreadPool::ThreadPool(size_t count) : stop_(false) {
     }
 }
 
-//向任务队列中加入新任务函数，利用返回类型后置语法和result_of得到任务函数返回值
+//向任务队列中加入新任务函数，利用返回类型后置语法得到任务函数返回值
 template <typename F, typename... Args>
 auto ThreadPool::enqueue(F&& f, Args&&... args)
-    -> std::future<typename std::result_of<F(Args...)>::type> {
+    -> std::future<decltype(f(args...))> {
     // using表示类型别名,类似typedef
-    using result_type = typename std::result_of<F(Args...)>::type;
+    // typename std::result_of<F(Args...)>::type
+    using result_type = decltype(f(args...));
 
     //利用std::packaged_task封装bind，可以异步执行
     //在这里使用packaged_task的主要原因是希望能够返回result，执行完任务后可以
